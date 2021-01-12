@@ -2,12 +2,19 @@
 const form = document.getElementById("dino-compare");
 const grid = document.getElementById("grid");
 const btn = document.getElementById("btn");
-localStorage.setItem("someVarKey", someVarName);
 
-var someVarName = localStorage.getItem("someVarKey");
 
     // Create Dino Constructor
-
+function Dino(species,weight,height,diet,where,when,fact,image) {
+    this.specis = species;
+    this.weight = weight;
+    this.height = height;
+    this.diet = diet;
+    this.where = where;
+    this.when = when;
+    this.fact = fact;
+    this.image = image;
+}
 
     // Create Dino Objects
 
