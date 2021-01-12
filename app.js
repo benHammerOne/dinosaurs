@@ -1,3 +1,10 @@
+// Global Variables
+const form = document.getElementById("dino-compare");
+const grid = document.getElementById("grid");
+const btn = document.getElementById("btn");
+localStorage.setItem("someVarKey", someVarName);
+
+var someVarName = localStorage.getItem("someVarKey");
 
     // Create Dino Constructor
 
