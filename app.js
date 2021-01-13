@@ -104,6 +104,15 @@ var human = {};
 
     // Use IIFE to get human data from form
 
+let getHumanData = (function() {
+    human.name = form.name.value;
+    human.height = parseInt(form.feet.value) * 12 + parseInt(form.inches.value);
+    human.weight = parseInt(form.weight.value);
+    human.diet = form.diet.value;
+    console.log("human data added");
+    return human;
+});
+
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
