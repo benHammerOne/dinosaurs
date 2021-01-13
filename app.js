@@ -84,7 +84,7 @@ var dinos = [
 
 
 
-    // Create Dino Constructor
+    // Create Dino Constructor ---- unnecessary due to json data copy&paste
 function Dino(species,weight,height,diet,where,when,fact,image) {
     this.specis = species;
     this.weight = weight;
@@ -96,8 +96,7 @@ function Dino(species,weight,height,diet,where,when,fact,image) {
     this.image = image;
 }
 
-    // Create Dino Objects
-
+    // Create Dino Objects ---- unnecessary due to json data copy&paste
 
     // Create Human Object
 
