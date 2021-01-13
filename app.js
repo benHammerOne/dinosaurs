@@ -100,6 +100,8 @@ function Dino(species,weight,height,diet,where,when,fact,image) {
 
     // Create Human Object
 
+var human = {};
+
     // Use IIFE to get human data from form
 
 
