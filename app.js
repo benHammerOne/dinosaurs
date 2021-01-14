@@ -98,6 +98,13 @@ function Dino(species,weight,height,diet,where,when,fact,image) {
 
     // Create Dino Objects ---- unnecessary due to json data copy&paste
 
+    // Add Dino Images
+
+dinos.forEach(function(index) {
+    index.image = "\\images\\" + index.species + ".png"; 
+});
+
+
     // Create Human Object
 
 var human = {};
@@ -108,7 +115,7 @@ let getHumanData = (function() {
     human.name = form.name.value;
     human.height = parseInt(form.feet.value) * 12 + parseInt(form.inches.value);
     human.weight = parseInt(form.weight.value);
-    human.diet = form.diet.value;
+    human.diet = form.diet.value.toLowerCase();
     console.log("human data added");
     return human;
 });
@@ -116,15 +123,55 @@ let getHumanData = (function() {
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches. 
-
+let heightCompare = (function(){
+    dinos.forEach(function compareHeight(index) {
+        if (index.height === human.height) {
+            index.heightCompareResult = "This Dino and you are of the same height. You are both " + index.height + "inches tall."
+        }
+        else {
+            if (index.height > human.height) {
+                index.heightCompareResult = "Dino is " + (index.height - human.height) + " inches taller than you."
+            }
+            else {
+                index.heightCompareResult = "You are taller than this dino! This dino is only " + index.height + " inches tall."
+            }
+        }
+    console.log("Height comparison finished for " + index.species);
+    })
+});
     
     // Create Dino Compare Method 2
     // NOTE: Weight in JSON file is in lbs, height in inches.
-
+let weightCompare = (function(){
+    dinos.forEach(function compareWeight(index) {
+        if (index.weight === human.weight) {
+            index.weightCompareResult = "This Dino and you are of the same weight. You are both " + index.weight + "lbs in weight."
+        }
+        else {
+            if (index.weight > human.weight) {
+                index.weightCompareResult = "Dino is " + (index.weight - human.weight) + " lbs heavier than you."
+            }
+            else {
+                index.weightCompareResult = "You are heavier than this dino! This dino is only " + index.weight + " lbs heavy."
+            }
+        }
+    console.log("Weight comparison finished for " + index.species);
+    })
+});
     
     // Create Dino Compare Method 3
     // NOTE: Weight in JSON file is in lbs, height in inches.
-
+let dietCompare = (function(){
+    dinos.forEach(function compareDiet(index) {
+        if (index.diet === human.diet) {
+            index.dietCompareResult = "This Dino and you are on the same diet. You are both " + index.diet + "s."
+        }
+        else {
+            index.dietCompareResult = "This Dino and you are on a different diet. This dino is a " + index.diet + " and you are a " + human.diet + "."
+        }
+    console.log("diet comparison finished for " + index.species);
+    })
+});  
 
     // Generate Tiles for each Dino in Array
   
