@@ -37,7 +37,7 @@ var dinos = [
         {
             "species": "Brachiosaurus",
             "weight": 70000,
-            "height": "372",
+            "height": 372,
             "diet": "herbavor",
             "where": "North America",
             "when": "Late Jurasic",
@@ -101,7 +101,7 @@ function Dino(species,weight,height,diet,where,when,fact,image) {
     // Add Dino Images
 
 dinos.forEach(function(index) {
-    index.image = "\\images\\" + index.species + ".png"; 
+    index.image = "images\/" + index.species + ".png"; 
 });
 
 
@@ -126,14 +126,14 @@ let getHumanData = (function() {
 let heightCompare = (function(){
     dinos.forEach(function compareHeight(index) {
         if (index.height === human.height) {
-            index.heightCompareResult = "This Dino and you are of the same height. You are both " + index.height + "inches tall."
+            index.comparisonResult = "This Dino and you are of the same height. You are both " + index.height + "inches tall."
         }
         else {
             if (index.height > human.height) {
-                index.heightCompareResult = "Dino is " + (index.height - human.height) + " inches taller than you."
+                index.comparisonResult = "Dino is " + (index.height - human.height) + " inches taller than you."
             }
             else {
-                index.heightCompareResult = "You are taller than this dino! This dino is only " + index.height + " inches tall."
+                index.comparisonResult = "You are taller than this dino! This dino is only " + index.height + " inches tall."
             }
         }
     console.log("Height comparison finished for " + index.species);
@@ -145,14 +145,14 @@ let heightCompare = (function(){
 let weightCompare = (function(){
     dinos.forEach(function compareWeight(index) {
         if (index.weight === human.weight) {
-            index.weightCompareResult = "This Dino and you are of the same weight. You are both " + index.weight + "lbs in weight."
+            index.comparisonResult = "This Dino and you are of the same weight. You are both " + index.weight + "lbs in weight."
         }
         else {
             if (index.weight > human.weight) {
-                index.weightCompareResult = "Dino is " + (index.weight - human.weight) + " lbs heavier than you."
+                index.comparisonResult = "Dino is " + (index.weight - human.weight) + " lbs heavier than you."
             }
             else {
-                index.weightCompareResult = "You are heavier than this dino! This dino is only " + index.weight + " lbs heavy."
+                index.comparisonResult = "You are heavier than this dino! This dino is only " + index.weight + " lbs heavy."
             }
         }
     console.log("Weight comparison finished for " + index.species);
@@ -164,21 +164,63 @@ let weightCompare = (function(){
 let dietCompare = (function(){
     dinos.forEach(function compareDiet(index) {
         if (index.diet === human.diet) {
-            index.dietCompareResult = "This Dino and you are on the same diet. You are both " + index.diet + "s."
+            index.comparisonResult = "This Dino and you are on the same diet. You are both " + index.diet + "s."
         }
         else {
-            index.dietCompareResult = "This Dino and you are on a different diet. This dino is a " + index.diet + " and you are a " + human.diet + "."
+            index.comparisonResult = "This Dino and you are on a different diet. This dino is a " + index.diet + " and you are a " + human.diet + "."
         }
     console.log("diet comparison finished for " + index.species);
     })
 });  
 
+
+    // choose random method to compare
+
+function chooseMethod(){
+    const comparingMethods = [heightCompare, weightCompare, dietCompare];
+    const randomElement = comparingMethods[Math.floor(Math.random() * comparingMethods.length)];
+    return randomElement();
+};
+
+
     // Generate Tiles for each Dino in Array
-  
+let showDinos = (function(){
+
+dinos.forEach(function(dino, index) {
+    const newDiv = document.createElement('div');
+    const newHeading = document.createElement('h3');
+    const newImage = document.createElement('img');
+    const newPara = document.createElement('p');
+
         // Add tiles to DOM
+
+grid.appendChild(newDiv);
+grid.children[index].classList.add('grid-item');
+grid.children[index].appendChild(newHeading);
+grid.children[index].firstChild.innerHTML = dino.species;
+grid.children[index].appendChild(newImage);
+grid.children[index].lastChild.src = dino.image;
+
+        // add comparison to grid elements
+
+grid.children[index].appendChild(newPara);
+grid.children[index].lastChild.innerHTML = dino.comparisonResult;
+    })
+
+    // add human to grid elements
+
+});
+
 
     // Remove form from screen
 
 
 // On button click, prepare and display infographic
 
+
+
+        function doIt() {
+            getHumanData();
+            chooseMethod();
+            showDinos();
+        };
