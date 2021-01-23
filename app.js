@@ -98,16 +98,10 @@ function Dino(species,weight,height,diet,where,when,fact,image) {
 
     // Create Dino Objects ---- unnecessary due to json data copy&paste
 
-    // Add Dino Images
-
-dinos.forEach(function(index) {
-    index.image = "images\/" + index.species + ".png"; 
-});
-
-
+ 
     // Create Human Object
 
-var human = {};
+var human = { "species" : "Human"};
 
     // Use IIFE to get human data from form
 
@@ -116,9 +110,20 @@ let getHumanData = (function() {
     human.height = parseInt(form.feet.value) * 12 + parseInt(form.inches.value);
     human.weight = parseInt(form.weight.value);
     human.diet = form.diet.value.toLowerCase();
+
+        // Add human to Dino Array
+
+        dinos.splice(4, 0, human);
+
     console.log("human data added");
     return human;
+
+
 });
+
+
+
+
 
 
     // Create Dino Compare Method 1
@@ -192,6 +197,10 @@ dinos.forEach(function(dino, index) {
     const newImage = document.createElement('img');
     const newPara = document.createElement('p');
 
+   // Add Dino Images
+    dino.image = "images\/" + dino.species + ".png"; 
+
+
         // Add tiles to DOM
 
 grid.appendChild(newDiv);
@@ -207,20 +216,38 @@ grid.children[index].appendChild(newPara);
 grid.children[index].lastChild.innerHTML = dino.comparisonResult;
     })
 
-    // add human to grid elements
+        // show Human Name
+        let humanName = grid.children[4].firstChild;
+        humanName.innerHTML = human.name;
+
+        // remove Human fact
+        let humanFact = grid.children[4].lastChild;
+        humanFact.parentNode.removeChild(humanFact);
+
+        // remove Pigeon fact
+        let pigeonFact = grid.lastChild.lastChild;
+        pigeonFact.innerHTML = dinos[8].fact;
+
 
 });
 
 
     // Remove form from screen
+    function hideForm(form) {
+        form.style.display ="none";
+    }
 
 
 // On button click, prepare and display infographic
 
+btn.addEventListener('click', doIt);
 
 
         function doIt() {
             getHumanData();
             chooseMethod();
             showDinos();
+            hideForm(form);
+            console.clear();
+            return false;
         };
