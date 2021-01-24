@@ -179,7 +179,7 @@ let dietCompare = (function(){
 });  
 
 
-    // choose random method to compare
+    // choose random method to compare -- from https://stackoverflow.com/questions/4550505/getting-a-random-value-from-a-javascript-array
 
 function chooseMethod(){
     const comparingMethods = [heightCompare, weightCompare, dietCompare];
